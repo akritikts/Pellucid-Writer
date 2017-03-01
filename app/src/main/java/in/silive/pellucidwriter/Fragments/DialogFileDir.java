@@ -67,7 +67,7 @@ public class DialogFileDir extends DialogFragment {
         getDialog().setTitle("Select folder");
         setCancelable(false);
         View view = inflater.inflate(R.layout.fragment_file_directory, container, false);
-        sharedPreferences = getActivity().getSharedPreferences(Config.KEY_BYTEPAD, Activity.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(Config.KEY_PWriter, Activity.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         btnSelect = (Button)view.findViewById(R.id.btnSelect);
         btnCancel = (Button)view.findViewById(R.id.btnCancel);
@@ -145,7 +145,7 @@ public class DialogFileDir extends DialogFragment {
                 String prevAddress = sharedPreferences.getString(Config.KEY_DOWNLOAD_DIR,"");
                 if (TextUtils.isEmpty(currentDir)){
                     File file = new File(Environment.getExternalStorageDirectory()
-                            +File.separator+"bytepad");
+                            +File.separator+"pellucid_writer");
                     file.mkdirs();
                     editor.putString(Config.KEY_DOWNLOAD_DIR,file.getAbsolutePath());
                     editor.commit();
@@ -181,11 +181,11 @@ public class DialogFileDir extends DialogFragment {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             Toast.makeText(getContext(), "External Storage Available", Toast.LENGTH_SHORT).show();
-            Log.d("Bytepad", "External Storage Available");
+            Log.d("Tag", "External Storage Available");
             return true;
         }
         Toast.makeText(getContext(), "External Storage UnAvailable", Toast.LENGTH_SHORT).show();
-        Log.d("Bytepad", "External Storage UnAvailable");
+        Log.d("Tag", "External Storage UnAvailable");
         return false;
     }
 
@@ -194,11 +194,11 @@ public class DialogFileDir extends DialogFragment {
         if (Environment.MEDIA_MOUNTED.equals(state) ||
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             Toast.makeText(getContext(), "External Storage Readable", Toast.LENGTH_SHORT).show();
-            Log.d("Bytepad", "External Storage Readable");
+            Log.d("Tag", "External Storage Readable");
             return true;
         }
         Toast.makeText(getContext(), "External Storage not Readable", Toast.LENGTH_SHORT).show();
-        Log.d("Bytepad", "External Storage not Readable");
+        Log.d("Tag", "External Storage not Readable");
         return false;
     }
 
@@ -207,9 +207,9 @@ public class DialogFileDir extends DialogFragment {
         File file = new File(context.getExternalFilesDir(
                 Environment.DIRECTORY_DOWNLOADS), albumName);
         if (!file.mkdirs()) {
-            Log.d("Bytepad", "Directory not created");
+            Log.d("Tag", "Directory not created");
         } else {
-            Log.d("Bytepad", "Directory created");
+            Log.d("Tag", "Directory created");
         }
         return file;
     }
