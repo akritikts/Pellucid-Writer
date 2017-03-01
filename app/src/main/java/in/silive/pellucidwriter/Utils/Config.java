@@ -5,6 +5,6 @@ package in.silive.pellucidwriter.Utils;
  */
 
 public class Config {
-    public static String KEY_BYTEPAD = "bytepad" ;
-    public static String KEY_DOWNLOAD_DIR = "bytepadDownload" ;
+    public static String KEY_BYTEPAD = "pellucid_writer" ;
+    public static String KEY_DOWNLOAD_DIR = "pellucid_writerDownload" ;
 }
