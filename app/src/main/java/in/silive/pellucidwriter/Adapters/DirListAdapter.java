@@ -46,7 +46,7 @@ public class DirListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view==null)
-            view = layoutInflater.inflate(R.layout.item_directory,null);
+            view = layoutInflater.inflate(R.layout.item_directory_list,null);
         TextView tv = (TextView)view.findViewById(R.id.tvDirName);
         tv.setText(dirList.get(i));
         return view;

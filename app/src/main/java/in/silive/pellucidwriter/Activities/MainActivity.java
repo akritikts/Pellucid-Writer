@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import in.silive.pellucidwriter.Fragments.DialogFileDir;
 import in.silive.pellucidwriter.R;
 
 public class MainActivity extends AppCompatActivity {

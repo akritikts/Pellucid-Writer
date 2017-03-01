@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -26,7 +25,9 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
+import in.silive.pellucidwriter.Adapters.DirListAdapter;
 import in.silive.pellucidwriter.R;
+import in.silive.pellucidwriter.Utils.Config;
 
 /**
  * Created by akriti on 1/3/17.
@@ -65,8 +66,8 @@ public class DialogFileDir extends DialogFragment {
         // Inflate the layout for this fragment
         getDialog().setTitle("Select folder");
         setCancelable(false);
-        View view = inflater.inflate(R.layout.fragment_dialog_file_dir, container, false);
-        sharedPreferences = getActivity().getSharedPreferences(Bitmap.Config.KEY_BYTEPAD, Activity.MODE_PRIVATE);
+        View view = inflater.inflate(R.layout.fragment_file_directory, container, false);
+        sharedPreferences = getActivity().getSharedPreferences(Config.KEY_BYTEPAD, Activity.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         btnSelect = (Button)view.findViewById(R.id.btnSelect);
         btnCancel = (Button)view.findViewById(R.id.btnCancel);
