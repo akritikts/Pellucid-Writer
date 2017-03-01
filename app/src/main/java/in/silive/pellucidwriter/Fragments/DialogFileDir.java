@@ -34,24 +34,25 @@ import in.silive.pellucidwriter.Utils.Config;
  */
 
 public class DialogFileDir extends DialogFragment {
+    public static boolean flag_ext_storage_avail;
+    public static boolean flag_ext_storage_readabl;
     //UI Elements
     Button btnSelect, btnCancel;
     EditText etAddress;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String currentDir;
-    public static boolean flag_ext_storage_avail;
-    public static boolean flag_ext_storage_readabl;
     ListView lvDir;
     ArrayList<String> dirList = new ArrayList<>();
     DirListAdapter adapter;
-    ImageView ivBack,ivNewDir;
+    ImageView ivBack, ivNewDir;
     DialogFileDir.Listener listener;
+
     public DialogFileDir() {
         // Required empty public constructor
     }
 
-    public void setListener(DialogFileDir.Listener listener){
+    public void setListener(DialogFileDir.Listener listener) {
         this.listener = listener;
     }
 
@@ -69,10 +70,10 @@ public class DialogFileDir extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_file_directory, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Config.KEY_PWriter, Activity.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        btnSelect = (Button)view.findViewById(R.id.btnSelect);
-        btnCancel = (Button)view.findViewById(R.id.btnCancel);
-        etAddress = (EditText)view.findViewById(R.id.etAddress);
-        ivNewDir = (ImageView)view.findViewById(R.id.ivNewDir);
+        btnSelect = (Button) view.findViewById(R.id.btnSelect);
+        btnCancel = (Button) view.findViewById(R.id.btnCancel);
+        etAddress = (EditText) view.findViewById(R.id.etAddress);
+        ivNewDir = (ImageView) view.findViewById(R.id.ivNewDir);
         ivNewDir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +84,7 @@ public class DialogFileDir extends DialogFragment {
                 builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String newDir = currentDir+File.separator+editText.getText().toString();
+                        String newDir = currentDir + File.separator + editText.getText().toString();
                         try {
                             File file = new File(newDir);
                             file.mkdirs();
@@ -103,27 +104,27 @@ public class DialogFileDir extends DialogFragment {
                 builder.create().show();
             }
         });
-        ivBack = (ImageView)view.findViewById(R.id.ivBack);
+        ivBack = (ImageView) view.findViewById(R.id.ivBack);
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!TextUtils.isEmpty(currentDir)){
+                if (!TextUtils.isEmpty(currentDir)) {
                     String[] array = currentDir.split(File.separator);
                     currentDir = "";
-                    for (int i=0;i<array.length-1;++i){
+                    for (int i = 0; i < array.length - 1; ++i) {
                         currentDir = currentDir + array[i];
-                        if (i!=array.length-2)
+                        if (i != array.length - 2)
                             currentDir += File.separator;
                     }
                     setUpList(currentDir);
                 }
             }
         });
-        lvDir = (ListView)view.findViewById(R.id.lvDirectories);
+        lvDir = (ListView) view.findViewById(R.id.lvDirectories);
         lvDir.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView tv = (TextView)view.findViewById(R.id.tvDirName);
+                TextView tv = (TextView) view.findViewById(R.id.tvDirName);
                 currentDir = currentDir + File.separator + tv.getText().toString();
                 setUpList(currentDir);
             }
@@ -132,9 +133,9 @@ public class DialogFileDir extends DialogFragment {
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putString(Config.KEY_DOWNLOAD_DIR,currentDir);
+                editor.putString(Config.KEY_DOWNLOAD_DIR, currentDir);
                 editor.commit();
-                if (listener!=null)
+                if (listener != null)
                     listener.onDirSelected(currentDir);
                 dismiss();
             }
@@ -142,12 +143,12 @@ public class DialogFileDir extends DialogFragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String prevAddress = sharedPreferences.getString(Config.KEY_DOWNLOAD_DIR,"");
-                if (TextUtils.isEmpty(currentDir)){
+                String prevAddress = sharedPreferences.getString(Config.KEY_DOWNLOAD_DIR, "");
+                if (TextUtils.isEmpty(currentDir)) {
                     File file = new File(Environment.getExternalStorageDirectory()
-                            +File.separator+"pellucid_writer");
+                            + File.separator + "pellucid_writer");
                     file.mkdirs();
-                    editor.putString(Config.KEY_DOWNLOAD_DIR,file.getAbsolutePath());
+                    editor.putString(Config.KEY_DOWNLOAD_DIR, file.getAbsolutePath());
                     editor.commit();
                 }
                 dismiss();
@@ -158,6 +159,7 @@ public class DialogFileDir extends DialogFragment {
 
         return view;
     }
+
     private void setUpList(String addr) {
         File f = new File(addr);
         if (!f.exists())
@@ -173,7 +175,7 @@ public class DialogFileDir extends DialogFragment {
                 dirList.add(inFile.getName());
             }
         }
-        adapter = new DirListAdapter(getActivity(),dirList);
+        adapter = new DirListAdapter(getActivity(), dirList);
         lvDir.setAdapter(adapter);
     }
 
@@ -214,7 +216,7 @@ public class DialogFileDir extends DialogFragment {
         return file;
     }
 
-    public static interface Listener{
+    public static interface Listener {
         public void onDirSelected(String addr);
     }
 

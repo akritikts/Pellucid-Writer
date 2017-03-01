@@ -25,6 +25,7 @@ public class PWIntroActivity extends AppIntro2 {
         setVibrate(true);
 
     }
+
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);

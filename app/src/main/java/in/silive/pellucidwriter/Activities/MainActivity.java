@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         dialogFileDir.setListener(new DialogFileDir.Listener() {
             @Override
             public void onDirSelected(String addr) {
-                Log.d("Tag", "Directory added "+ addr);
+                Log.d("Tag", "Directory added " + addr);
             }
         });
         Thread t = new Thread(new Runnable() {
